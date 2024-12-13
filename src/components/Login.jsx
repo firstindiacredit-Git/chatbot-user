@@ -119,9 +119,9 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full max-w-md p-6 shadow-lg rounded-lg bg-white sm:p-8">
+    <div className="w-full max-w-md p-6 justify-center rounded-lg bg-white sm:p-8">
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-        User Login
+        User Details
       </h2>
 
       {errorMessage && (
