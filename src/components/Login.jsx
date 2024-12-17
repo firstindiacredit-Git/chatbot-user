@@ -97,7 +97,7 @@ const Login = () => {
     setLoading(true);
     setErrorMessage(""); // Clear previous error messages
     try {
-      const response = await axios.post("http://localhost:5000/api/user/auth", {
+      const response = await axios.post("https://chatbot.pizeonfly.com/api/user/auth", {
         name,
         phone,
       });
