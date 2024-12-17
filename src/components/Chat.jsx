@@ -109,7 +109,7 @@ const Chat = () => {
                            msg.attachment.endsWith(".png") ||
                           msg.attachment.endsWith(".gif") ? (
                            <img
-                             src={`https://chatbot.pizeonfly.com/${msg.attachment}`}
+                             src={`https://chatbot.pizeonfly.com${msg.attachment}`}
                              alt="attachment"
                              className="max-w-full h-auto rounded-md mt-2"
                            />
