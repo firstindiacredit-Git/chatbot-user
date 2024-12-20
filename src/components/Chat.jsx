@@ -780,7 +780,7 @@ const Chat = () => {
   const groupedMessages = groupMessagesByDate(messages);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-0">
+    <div className="flex items-center justify-center bg-gray-100 p-0">
       <div className="bg-white w-full max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] rounded-lg p-4 flex flex-col">
         <h1 className="text-bold text-xl sm:text-2xl text-center mb-2">
           Chat Support
