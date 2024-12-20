@@ -88,6 +88,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ const Login = () => {
     try {
       const response = await axios.post("https://chatbot.pizeonfly.com/api/user/auth", {
         name,
+        email,
         phone,
       });
 
@@ -137,6 +139,16 @@ const Login = () => {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
