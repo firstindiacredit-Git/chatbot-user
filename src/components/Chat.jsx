@@ -788,7 +788,7 @@ const Chat = () => {
 
   return (
     <div className="flex items-center justify-center bg-gray-100 p-0">
-      <div className="bg-white w-full max-w-full sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] rounded-lg p-2 h-[550px] flex flex-col">
+      <div className="bg-white w-full max-w-full sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] rounded-lg p-2 h-[500px] flex flex-col">
         <h1 className="text-bold text-xl sm:text-2xl text-center">
           Chat Support
         </h1>
