@@ -645,6 +645,7 @@
 
 
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import axios from "axios";
 import { io } from "socket.io-client";
 import moment from "moment";
@@ -661,7 +662,13 @@ const Chat = () => {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  const socket = io("https://chatbot.pizeonfly.com");
+  const socket = io("http://localhost:5000");
+
+  const location = useLocation(); // Use useLocation to access state
+  const websiteId = location.state?.websiteId; // Retrieve websiteId
+  console.log(websiteId);
+  
+
 
   const formatTime = (timestamp) => moment(timestamp).format("h:mm A");
   const formatDate = (timestamp) => moment(timestamp).format("MMMM DD, YYYY");
@@ -672,12 +679,12 @@ const Chat = () => {
       return;
     }
 
-    socket.emit("join_room", userId);
+    socket.emit("join_room", userId, websiteId);
 
     const fetchMessages = async () => {
       try {
         const response = await axios.get(
-          `https://chatbot.pizeonfly.com/api/messages/${userId}`,
+          `http://localhost:5000/api/messages/${userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -697,7 +704,7 @@ const Chat = () => {
     return () => {
       socket.off("receive_message");
     };
-  }, [userId, token]);
+  }, [userId, token, websiteId]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -734,7 +741,7 @@ const Chat = () => {
       if (file) formData.append("attachment", file);
 
       const response = await axios.post(
-        "https://chatbot.pizeonfly.com/api/message",
+        "http://localhost:5000/api/message",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -781,12 +788,12 @@ const Chat = () => {
 
   return (
     <div className="flex items-center justify-center bg-gray-100 p-0">
-      <div className="bg-white w-full max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] rounded-lg p-4 flex flex-col">
-        <h1 className="text-bold text-xl sm:text-2xl text-center mb-2">
+      <div className="bg-white w-full max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[50%] rounded-lg p-2 h-[650px] flex flex-col">
+        <h1 className="text-bold text-xl sm:text-2xl text-center">
           Chat Support
         </h1>
 
-        <div className="messages h-[60vh] overflow-y-scroll border border-gray-300 rounded-lg p-2 mb-4 break-words">
+        <div className="messages h-[80vh] overflow-y-scroll border border-gray-300 rounded-lg p-2 mb-4 break-words">
           {Object.keys(groupedMessages).map((date, index) => (
             <div key={index}>
               <div className="sticky top-0 text-center text-gray-500 text-sm mb-2 py-1 z-10">
@@ -813,7 +820,7 @@ const Chat = () => {
                           msg.attachment.endsWith(".png") ||
                           msg.attachment.endsWith(".gif") ? (
                             <img
-                              src={`https://chatbot.pizeonfly.com${msg.attachment}`}
+                              src={`http://localhost:5000${msg.attachment}`}
                               alt="attachment"
                               className="max-w-full h-auto rounded-md mt-2"
                             />
@@ -821,13 +828,13 @@ const Chat = () => {
                             msg.attachment.endsWith(".webm") ||
                             msg.attachment.endsWith(".ogg") ? (
                             <video
-                              src={`https://chatbot.pizeonfly.com${msg.attachment}`}
+                              src={`http://localhost:5000${msg.attachment}`}
                               controls
                               className="max-w-full h-auto rounded-md mt-2"
                             />
                           ) : msg.attachment.endsWith(".pdf") ? (
                             <a
-                              href={`https://chatbot.pizeonfly.com${msg.attachment}`}
+                              href={`http://localhost:5000${msg.attachment}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-blue-500 underline mt-2"

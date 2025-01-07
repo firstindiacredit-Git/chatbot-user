@@ -530,7 +530,7 @@ const Login = () => {
       }
 
       try {
-        const response = await axios.get(`https://chatbot.pizeonfly.com/api/services/${websiteId}`);
+        const response = await axios.get(`http://localhost:5000/api/services/${websiteId}`);
         setAvailableServices(response.data);
       } catch (error) {
         console.error("Error fetching services:", error);
@@ -581,7 +581,7 @@ const Login = () => {
 
   const performLogin = async (location, websiteId) => {
     try {
-      const response = await axios.post("https://chatbot.pizeonfly.com/api/user/auth", {
+      const response = await axios.post("http://localhost:5000/api/user/auth", {
         name,
         email,
         phone,
@@ -593,7 +593,7 @@ const Login = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.userId);
 
-      navigate("/chat");
+      navigate("/chat", { state: { websiteId } });
     } catch (error) {
       console.error("Login error:", error);
       setErrorMessage(
