@@ -793,7 +793,7 @@ const Chat = () => {
           Chat Support
         </h1>
 
-        <div className="messages h-[80vh] overflow-y-scroll border border-gray-300 rounded-lg p-2 mb-4 break-words">
+        <div className="messages w-full h-[75vh] overflow-y-scroll border border-gray-300 rounded-lg p-2 mb-4 break-words">
           {Object.keys(groupedMessages).map((date, index) => (
             <div key={index}>
               <div className="sticky top-0 text-center text-gray-500 text-sm mb-2 py-1 z-10">
