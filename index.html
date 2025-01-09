@@ -6,7 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + React</title>
-  <meta http-equiv="Permissions-Policy" content="geolocation=(self)">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(self 'https://chatbot-user.vercel.app')">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -18,48 +19,63 @@
     });
   </script> -->
 
+
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const createElement = (tag, attrs = {}, html = "") => Object.assign(document.createElement(tag), attrs, html ? { innerHTML: html } : {});
+      const getLocation = (cb) => navigator.geolocation?.getCurrentPosition(
+        ({ coords }) => cb(`&latitude=${coords.latitude}&longitude=${coords.longitude}`),
+        () => cb("")
+      ) || cb("");
+      
+      getLocation((loc) => {
+        const iframe = createElement("iframe", {
+          src: `https://chatbot-user.vercel.app/?websiteId=fic12${loc}`,
+          style: "position:fixed;bottom:100px;right:20px;width:350px;height:500px;border:none;z-index:9999;box-shadow:0 4px 8px rgba(0,0,0,0.2);display:none;background:white;",
+          allow: "geolocation"
+        });
+        const chatIcon = createElement("div", {
+          className: "chat",
+          style: "position:fixed;bottom:20px;right:20px;width:64px;height:64px;background:#1950ff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10000;",
+          onclick: () => (iframe.style.display = iframe.style.display === "none" ? "block" : "none")
+        }, `<svg width="30" height="30" fill="#fff"><circle cx="15" cy="15" r="12"></circle><text x="9" y="20" font-size="12">Chat</text></svg>`);
+        document.body.append(chatIcon, iframe);
+      });
+    });
+  </script> -->
+
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const createElement = (tag, attrs = {}, html = "") => Object.assign(document.createElement(tag), attrs, html ? { innerHTML: html } : {});
+      const getLocation = (cb) => navigator.geolocation?.getCurrentPosition(
+        ({ coords }) => cb(`&latitude=${coords.latitude}&longitude=${coords.longitude}`),
+        () => cb("")
+      ) || cb("");
+      
+      getLocation((loc) => {
+        const iframe = createElement("iframe", {
+          src: `https://chatbot-user.vercel.app/?websiteId=pizeon1${loc}`,
+          style: "position:fixed;bottom:100px;right:20px;width:350px;height:500px;border:none;z-index:9999;box-shadow:0 4px 8px rgba(0,0,0,0.2);display:none;background:white;",
+          allow: "geolocation"
+        });
+        const chatIcon = createElement("div", {
+          className: "chat",
+          style: "position:fixed;bottom:20px;right:20px;width:64px;height:64px;background:#1950ff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10000;",
+          onclick: () => (iframe.style.display = iframe.style.display === "none" ? "block" : "none")
+        }, `<svg width="30" height="30" fill="#fff"><circle cx="15" cy="15" r="12"></circle><text x="9" y="20" font-size="12">Chat</text></svg>`);
+        document.body.append(chatIcon, iframe);
+      });
+    });
+    </script> -->
+  
+
   
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
-  <!-- <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const s = (t, a = {}, c = "") => Object.assign(document.createElement(t), a, c ? { innerHTML: c } : {});
-      const iframe = s("iframe", {
-        src: "https://chatbot-user.vercel.app/?websiteId=fic12",
-        style: "position:fixed;bottom:100px;right:20px;width:350px;height:500px;border:none;z-index:9999;box-shadow:0 4px 8px rgba(0,0,0,0.2);display:none;background:white;"
-      });
-      const chatIcon = s("div", {
-        className: "chat",
-        style: "position:fixed;bottom:20px;right:20px;width:64px;height:64px;background:#1950ff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10000;"
-      }, `<svg width="30" height="30" fill="#fff"><circle cx="15" cy="15" r="12" stroke="none"></circle><text x="9" y="20" font-size="12">Chat</text></svg>`);
-    
-      chatIcon.addEventListener("click", () => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords;
-              // Update the iframe src with the location
-              iframe.src = `https://chatbot-user.vercel.app/?websiteId=fic12&latitude=${latitude}&longitude=${longitude}`;
-              iframe.style.display = "block"; // Show the iframe
-            },
-            (error) => {
-              console.warn("Geolocation error:", error);
-              // Proceed without location
-              iframe.style.display = "block"; // Show the iframe without location
-            }
-          );
-        } else {
-          console.warn("Geolocation not supported.");
-          iframe.style.display = "block"; // Show the iframe without location
-        }
-      });
-    
-      document.body.append(chatIcon, iframe);
-    });
-    </script> -->
+  
 </body>
 
 </html>
