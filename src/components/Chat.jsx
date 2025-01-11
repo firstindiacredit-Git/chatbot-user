@@ -662,7 +662,7 @@ const Chat = () => {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  const socket = io("https://chatbot.pizeonfly.com");
+  const socket = io("http://localhost:5000");
 
   const location = useLocation(); // Use useLocation to access state
   const websiteId = location.state?.websiteId; // Retrieve websiteId
@@ -684,7 +684,7 @@ const Chat = () => {
     const fetchMessages = async () => {
       try {
         const response = await axios.get(
-          `https://chatbot.pizeonfly.com/api/messages/${userId}`,
+          `http://localhost:5000/api/messages/${userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -741,7 +741,7 @@ const Chat = () => {
       if (file) formData.append("attachment", file);
 
       const response = await axios.post(
-        "https://chatbot.pizeonfly.com/api/message",
+        "http://localhost:5000/api/message",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -820,7 +820,7 @@ const Chat = () => {
                           msg.attachment.endsWith(".png") ||
                           msg.attachment.endsWith(".gif") ? (
                             <img
-                              src={`https://chatbot.pizeonfly.com${msg.attachment}`}
+                              src={`http://localhost:5000${msg.attachment}`}
                               alt="attachment"
                               className="max-w-full h-auto rounded-md mt-2"
                             />
@@ -828,13 +828,13 @@ const Chat = () => {
                             msg.attachment.endsWith(".webm") ||
                             msg.attachment.endsWith(".ogg") ? (
                             <video
-                              src={`https://chatbot.pizeonfly.com${msg.attachment}`}
+                              src={`http://localhost:5000${msg.attachment}`}
                               controls
                               className="max-w-full h-auto rounded-md mt-2"
                             />
                           ) : msg.attachment.endsWith(".pdf") ? (
                             <a
-                              href={`https://chatbot.pizeonfly.com${msg.attachment}`}
+                              href={`http://localhost:5000${msg.attachment}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-blue-500 underline mt-2"
