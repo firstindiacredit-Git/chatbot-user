@@ -152,7 +152,7 @@ const Login = () => {
         </div>
 
         {/* Form Section */}
-        <div className="p-4">
+        <div className="p-4 ">
           {errorMessage && (
             <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-shake">
               <p className="font-medium">Error</p>
