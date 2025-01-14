@@ -152,7 +152,7 @@ const Login = () => {
         </div>
 
         {/* Form Section */}
-        <div className="p-6">
+        <div className="p-4">
           {errorMessage && (
             <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-shake">
               <p className="font-medium">Error</p>
@@ -162,7 +162,7 @@ const Login = () => {
 
           <form onSubmit={handleLogin} className="space-y-1">
             {/* Name Input */}
-            <div className="space-y-1">
+            <div className="space-y-1 ">
               <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <FaUser className="text-gray-400" />
                 Full Name
