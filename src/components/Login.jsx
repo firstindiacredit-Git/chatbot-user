@@ -144,7 +144,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <div className="w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="w-full bg-white overflow-hidden">
         {/* Header Section */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
           <h2 className="text-2xl font-bold mb-1">Welcome to ChatFlow</h2>
