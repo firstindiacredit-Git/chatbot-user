@@ -146,13 +146,13 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 p-4">
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-8 text-white">
-          <h2 className="text-3xl font-bold mb-2">Welcome to ChatFlow</h2>
-          <p className="text-blue-100">Please enter your details to get started</p>
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
+          <h2 className="text-2xl font-bold mb-1">Welcome to ChatFlow</h2>
+          <p className="text-blue-100 text-sm">Please enter your details to get started</p>
         </div>
 
         {/* Form Section */}
-        <div className="p-8">
+        <div className="p-6">
           {errorMessage && (
             <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-shake">
               <p className="font-medium">Error</p>
@@ -160,9 +160,9 @@ const Login = () => {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-1">
             {/* Name Input */}
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <FaUser className="text-gray-400" />
                 Full Name
@@ -172,13 +172,13 @@ const Login = () => {
                 placeholder="Enter your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
+                className="w-full p-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
                 required
               />
             </div>
 
             {/* Email Input */}
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <FaEnvelope className="text-gray-400" />
                 Email Address
@@ -188,13 +188,13 @@ const Login = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
+                className="w-full p-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
                 required
               />
             </div>
 
             {/* Phone Input */}
-            <div className="space-y-2">
+            <div className="space-y-1">
               <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <FaPhone className="text-gray-400" />
                 Phone Number
@@ -204,20 +204,20 @@ const Login = () => {
                 placeholder="Enter your phone number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
+                className="w-full p-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
                 required
               />
             </div>
 
             {/* Services Selection */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">Available Services</label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {availableServices.length > 0 ? (
                   availableServices.map((service) => (
                     <label
                       key={service._id}
-                      className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
+                      className={`flex items-center gap-2 p-2 rounded-xl border cursor-pointer transition-all ${
                         selectedServices.includes(service.name)
                           ? 'bg-blue-50 border-blue-200'
                           : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
@@ -230,7 +230,7 @@ const Login = () => {
                         onChange={() => handleServiceChange(service.name)}
                         className="hidden"
                       />
-                      <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                      <div className={`w-4 h-4 rounded-full flex items-center justify-center ${
                         selectedServices.includes(service.name)
                           ? 'bg-blue-500 text-white'
                           : 'bg-white border border-gray-300'
