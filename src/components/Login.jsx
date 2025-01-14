@@ -908,7 +908,7 @@ const Login = () => {
 
     const fetchUserLocation = async () => {
       try {
-        const response = await axios.get("http://ip-api.com/json/");
+        const response = await axios.get("https://ip-api.com/json/");
     
         const userAgent = navigator.userAgent;
         const platform = navigator.platform;
