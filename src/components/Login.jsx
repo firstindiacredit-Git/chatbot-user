@@ -867,6 +867,8 @@
 
 
 
+
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -895,7 +897,7 @@ const Login = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/services/${websiteId}`
+          `https://chatbot.pizeonfly.com/api/services/${websiteId}`
         );
         setAvailableServices(response.data);
       } catch (error) {
@@ -906,62 +908,52 @@ const Login = () => {
 
     const fetchUserLocation = async () => {
       try {
-        const response = await axios.get("https://ipapi.co/json/");
-
+        const response = await axios.get("http://ip-api.com/json/");
+    
         const userAgent = navigator.userAgent;
         const platform = navigator.platform;
         const os = platform || "Unknown OS";
         let browser = "Unknown Browser";
-
-        if (userAgent.indexOf("Chrome") > -1) {
+    
+        if (userAgent.includes("Chrome")) {
           browser = "Chrome";
-        } else if (userAgent.indexOf("Safari") > -1) {
+        } else if (userAgent.includes("Safari")) {
           browser = "Safari";
-        } else if (userAgent.indexOf("Firefox") > -1) {
+        } else if (userAgent.includes("Firefox")) {
           browser = "Firefox";
-        } else if (userAgent.indexOf("MSIE") > -1 || userAgent.indexOf("Trident/") > -1) {
+        } else if (userAgent.includes("MSIE") || userAgent.includes("Trident/")) {
           browser = "Internet Explorer";
-        } else if (userAgent.indexOf("Edge") > -1) {
+        } else if (userAgent.includes("Edge")) {
           browser = "Edge";
         }
+    
         const locationData = {
-          ip: response.data.ip,
-          network: response.data.network,
-          version: response.data.version,
-          city: response.data.city,
-          region: response.data.region,
-          region_code: response.data.region_code,
+          status: response.data.status,
           country: response.data.country,
-          country_name: response.data.country_name,
-          country_code: response.data.country_code,
-          country_code_iso3: response.data.country_code_iso3,
-          country_capital: response.data.country_capital,
-          country_tld: response.data.country_tld,
-          continent_code: response.data.continent_code,
-          in_eu: response.data.in_eu,
-          postal: response.data.postal,
-          latitude: response.data.latitude,
-          longitude: response.data.longitude,
+          countryCode: response.data.countryCode,
+          region: response.data.region,
+          regionName: response.data.regionName,
+          city: response.data.city,
+          zip: response.data.zip,
+          lat: response.data.lat,
+          lon: response.data.lon,
           timezone: response.data.timezone,
-          utc_offset: response.data.utc_offset,
-          country_calling_code: response.data.country_calling_code,
-          currency: response.data.currency,
-          currency_name: response.data.currency_name,
-          languages: response.data.languages,
-          country_area: response.data.country_area,
-          country_population: response.data.country_population,
-          asn: response.data.asn,
+          isp: response.data.isp,
           org: response.data.org,
+          as: response.data.as,
+          query: response.data.query,
           os,
           browser,
         };
+    
         setLocation(locationData); // Set location state
-        console.log(locationData)
+        console.log(locationData);
       } catch (error) {
         console.error("Error fetching location:", error);
         setErrorMessage("Failed to fetch location.");
       }
     };
+    
 
     fetchServices();
     fetchUserLocation(); // Fetch user location on component mount
@@ -995,7 +987,7 @@ const Login = () => {
 
   const performLogin = async (location, websiteId) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/user/auth", {
+      const response = await axios.post("https://chatbot.pizeonfly.com/api/user/auth", {
         name,
         email,
         phone,
