@@ -908,7 +908,7 @@ const Login = () => {
 
     const fetchUserLocation = async () => {
       try {
-        const response = await axios.get("https://ip-api.com/json/");
+        const response = await axios.get("https://get.geojs.io/v1/ip/geo.json");
     
         const userAgent = navigator.userAgent;
         const platform = navigator.platform;
@@ -928,31 +928,33 @@ const Login = () => {
         }
     
         const locationData = {
-          status: response.data.status,
-          country: response.data.country,
-          countryCode: response.data.countryCode,
+          countryCode: response.data.country_code,
+          countryCode3: response.data.country_code3,
+          continentCode: response.data.continent_code,
           region: response.data.region,
-          regionName: response.data.regionName,
           city: response.data.city,
-          zip: response.data.zip,
-          lat: response.data.lat,
-          lon: response.data.lon,
+          latitude: response.data.latitude,
+          longitude: response.data.longitude,
+          accuracy: response.data.accuracy,
+          country: response.data.country,
           timezone: response.data.timezone,
-          isp: response.data.isp,
-          org: response.data.org,
-          as: response.data.as,
-          query: response.data.query,
+          areaCode: response.data.area_code,
+          ip: response.data.ip,
+          asn: response.data.asn,
+          organization: response.data.organization,
+          organizationName: response.data.organization_name,
           os,
           browser,
         };
     
-        setLocation(locationData); // Set location state
+        setLocation(locationData); // Set the location state with new structure
         console.log(locationData);
       } catch (error) {
         console.error("Error fetching location:", error);
         setErrorMessage("Failed to fetch location.");
       }
     };
+    
     
 
     fetchServices();
