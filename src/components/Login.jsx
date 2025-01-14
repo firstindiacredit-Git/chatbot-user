@@ -160,7 +160,7 @@ const Login = () => {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-1">
+          <form onSubmit={handleLogin} className="space-y-1 flex flex-col justify-between">
             {/* Name Input */}
             <div className="space-y-1 ">
               <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
@@ -247,9 +247,10 @@ const Login = () => {
             </div>
 
             {/* Submit Button */}
+            <div className="">
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-xl font-medium 
+              className="w-full mt-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-6 rounded-xl font-medium 
                 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
                 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg shadow-blue-500/25"
               disabled={loading}
@@ -266,6 +267,7 @@ const Login = () => {
                 'Start Chatting'
               )}
             </button>
+            </div>
           </form>
         </div>
       </div>
