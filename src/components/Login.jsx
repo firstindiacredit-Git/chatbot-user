@@ -143,7 +143,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="h-full flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50">
       <div className="w-full bg-white overflow-hidden">
         {/* Header Section */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
