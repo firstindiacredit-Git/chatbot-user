@@ -141,8 +141,8 @@ const Chat = () => {
   const groupedMessages = groupMessagesByDate(messages);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 p-4">
-      <div className="bg-white w-full max-w-4xl rounded-2xl shadow-xl overflow-hidden flex flex-col">
+    <div className="h-screen flex bg-gradient-to-br from-blue-50 via-white to-blue-50">
+      <div className="w-full flex flex-col bg-white">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
           <h1 className="text-xl font-bold">Chat Support</h1>
@@ -153,7 +153,6 @@ const Chat = () => {
         <div 
           className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar"
           style={{
-            height: 'calc(100vh - 200px)',
             backgroundImage: `linear-gradient(rgba(255,255,255,.97), rgba(255,255,255,.97)), url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E")`
           }}
         >
@@ -230,8 +229,8 @@ const Chat = () => {
           ))}
         </div>
 
-        {/* Message Input */}
-        <div className="p-4 bg-white border-t">
+        {/* Message Input - Fixed at bottom */}
+        <div className="border-t bg-white p-4">
           <div className="flex items-center gap-2">
             <div className="flex-1 relative">
               <textarea
@@ -239,7 +238,7 @@ const Chat = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="w-full px-4 py-3 bg-gray-50 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-100 focus:bg-white transition-all"
+                className="w-full px-4 py-3 bg-gray-50 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-100 focus:bg-white transition-all max-h-32"
                 rows="1"
               />
             </div>
