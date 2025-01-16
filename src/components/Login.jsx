@@ -12,6 +12,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [location, setLocation] = useState(null); // State to hold location data
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -100,10 +102,48 @@ const Login = () => {
     );
   };
 
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(phone);
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) {
+      setPhone(value);
+      setPhoneError(!validatePhone(value) && value ? "Invalid phone number. Must be 10 digits." : "");
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setEmailError(!validateEmail(value) && value ? "Invalid email address." : "");
+  };
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage("");
+
+    if (!validatePhone(phone)) {
+      setErrorMessage("Invalid phone number. Must be 10 digits.");
+      setLoading(false);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setErrorMessage("Invalid email address.");
+      setLoading(false);
+      return;
+    }
 
     const urlParams = new URLSearchParams(window.location.search);
     const websiteId = urlParams.get("websiteId");
@@ -187,7 +227,7 @@ const Login = () => {
                 type="email"
                 placeholder="Enter your email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 className="w-full p-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
                 required
               />
@@ -203,7 +243,7 @@ const Login = () => {
                 type="text"
                 placeholder="Enter your phone number"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={handlePhoneChange}
                 className="w-full p-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all"
                 required
               />
