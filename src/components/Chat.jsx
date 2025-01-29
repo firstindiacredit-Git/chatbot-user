@@ -11,8 +11,12 @@ const Chat = () => {
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [property, setProperty] = useState(null);
 
-  const adminId = "675980503b55ec4b1208890b";
+  
+  const adminId = property?.adminId;
+  //console.log(adminId);
+  // console.log(adminId==="675980503b55ec4b1208890b");
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
@@ -26,6 +30,22 @@ const Chat = () => {
 
   const formatTime = (timestamp) => moment(timestamp).format("h:mm A");
   const formatDate = (timestamp) => moment(timestamp).format("MMMM DD, YYYY");
+
+  useEffect(() => {
+    const fetchProperty = async () => {
+      
+      if (websiteId) {
+        try {
+          const response = await axios.get(`https://chatbot.pizeonfly.com/api/properties/website/${websiteId}`);
+          setProperty(response.data);
+          // console.log(response.data);
+        } catch (error) {
+          console.error('Error fetching property:', error);
+        }
+      }
+    };
+    fetchProperty();
+  }, [websiteId]);
 
   useEffect(() => {
     if (!userId || !token) {
@@ -81,6 +101,7 @@ const Chat = () => {
     }
   };
 
+  
   const handleSendMessage = async () => {
     if (!message.trim() && !file) {
       console.error("Message content or file is required.");
@@ -144,7 +165,9 @@ const Chat = () => {
     <div className="h-screen flex bg-gradient-to-br from-blue-50 via-white to-blue-50">
       <div className="w-full flex flex-col bg-white">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
+        <div className={`bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white`} style={{ 
+          background: property?.color || '#3b82f6'
+        }}>
           <h1 className="text-xl font-bold">Chat Support</h1>
           <p className="text-blue-100 text-sm">We typically reply within a few minutes</p>
         </div>
@@ -176,7 +199,7 @@ const Chat = () => {
                       className={`
                         p-3 rounded-2xl shadow-sm
                         ${msg.senderId === userId
-                          ? "bg-blue-600 text-white rounded-br-none"
+                          ? `bg-[${property?.color || '#3b82f6'}] text-white rounded-br-none` 
                           : "bg-gray-100 text-gray-800 rounded-bl-none"
                         }
                       `}
@@ -231,7 +254,7 @@ const Chat = () => {
 
         {/* Message Input - Fixed at bottom */}
         <div className="border-t bg-white p-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-2">
             <div className="flex-1 relative">
               <textarea
                 value={message}
@@ -259,11 +282,14 @@ const Chat = () => {
 
               <button
                 onClick={handleSendMessage}
-                className="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center group"
+                className={`p-3 text-white rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center group`} style={{ 
+                  background: property?.color || '#3b82f6'
+                }}
               >
                 <FaPaperPlane className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
+            <p className="text-xs text-gray-500 font-medium fixed bottom-2 left-32 text-center mt-2">powered by pizeonfly</p>
           </div>
         </div>
 
@@ -305,7 +331,9 @@ const Chat = () => {
                   </button>
                   <button
                     onClick={handleSendMessage}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className={`px-4 py-2 text-white rounded-lg hover:bg-blue-700 transition-colors`} style={{ 
+                      background: property?.color || '#3b82f6'
+                    }}
                   >
                     Send
                   </button>
