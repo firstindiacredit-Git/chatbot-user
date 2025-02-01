@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
@@ -12,6 +12,7 @@ const Chat = () => {
   const [filePreview, setFilePreview] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [property, setProperty] = useState(null);
+  const messagesEndRef = useRef(null);
 
   
   const adminId = property?.adminId;
@@ -161,6 +162,14 @@ const Chat = () => {
 
   const groupedMessages = groupMessagesByDate(messages);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <div className="h-screen flex bg-gradient-to-br from-blue-50 via-white to-blue-50">
       <div className="w-full flex flex-col bg-white">
@@ -250,6 +259,8 @@ const Chat = () => {
               ))}
             </div>
           ))}
+          
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Message Input - Fixed at bottom */}
@@ -289,7 +300,7 @@ const Chat = () => {
                 <FaPaperPlane className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
-            <p className="text-xs text-gray-500 font-medium fixed bottom-2 left-32 text-center mt-2">powered by pizeonfly</p>
+            <a href="https://pizeonfly.com" target="_blank" rel="noopener noreferrer"> <p className="text-xs text-gray-500 font-medium fixed bottom-2 left-32 text-center mt-2">powered by pizeonfly</p></a>
           </div>
         </div>
 

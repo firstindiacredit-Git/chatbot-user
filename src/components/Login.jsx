@@ -407,7 +407,7 @@ const Login = () => {
 
       </div>
       <div className="bg-white z-50 w-full fixed bottom-0 p-2 text-center">
-        <p className="text-xs font-medium text-gray-500">powered by pizeonfly</p>
+        <a href="https://pizeonfly.com" target="_blank" rel="noopener noreferrer"><p className="text-xs font-medium text-gray-500 cursor-pointer">powered by pizeonfly</p></a>
       </div>
       
     </div>
